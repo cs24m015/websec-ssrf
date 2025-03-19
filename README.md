@@ -15,50 +15,15 @@ This repository contains a simple demonstration of a Server-Side Request Forgery
 
 ## Prerequisites
 
-- Python 3.x
-- Flask library
+- Docker Desktop
 
-You can install Flask using pip:
+Use Docker Compose in the folder with the files:
 
-```bash
-pip install Flask
+```
+docker-compose up --build
 ```
 
-## Setup Instructions
-
-### Step 1: Create the Second Service
-
-Create a new file called `confidential_service.py` and add the following code:
-
-```python
-# confidential_service.py
-from flask import Flask, jsonify
-
-app = Flask(__name__)
-
-@app.route('/confidential', methods=['GET'])
-def confidential():
-    return jsonify({'status': 'success', 'data': 'This is confidential information!'})
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
-```
-
-### Step 2: Run the Second Service
-
-Run the second service in a separate terminal:
-
-```bash
-python confidential_service.py
-```
-
-This service will be accessible at `http://localhost:5001/confidential`.
-
-### Step 3: Modify the SSRF Demonstration App
-
-You can modify your SSRF demonstration app to allow fetching from the second service. For demonstration purposes, you can use a specific URL that points to the confidential service.
-
-### Step 4: Test the SSRF
+### Step 1: Test the SSRF
 
 You can test the SSRF by sending a request to the `/fetch` endpoint with the URL of the confidential service. Use the following `curl` command:
 
