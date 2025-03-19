@@ -1,0 +1,15 @@
+services:
+  ssrf_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+
+  confidential_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    command: ["python", "confidential_service.py"]
