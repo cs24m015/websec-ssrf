@@ -43,7 +43,7 @@ If everything is set up correctly, you should see a response that includes the c
 The fetch endpoint accepts a URL from the user via a JSON payload. This means that an attacker can provide any URL they choose, including internal services or resources that the server has access to.
 
 2. Lack of Input Validation
-There is no validation or sanitization of the URL input. An attacker can send a request to the fetch endpoint with a URL that points to internal services, such as http://localhost:5001/confidential or http://169.254.169.254/latest/meta-data/ (which is often used to access metadata in cloud environments).
+There is no validation or sanitization of the URL input. An attacker can send a request to the fetch endpoint with a URL that points to internal services, such as http://localhost:5001/confidential
 
 3. Potential for Data Exposure
 If the attacker can successfully make a request to an internal service, they may be able to access sensitive information. For example, if the attacker sends a request to the confidential endpoint running on port 5001, they could retrieve confidential data that should not be exposed to external users.
