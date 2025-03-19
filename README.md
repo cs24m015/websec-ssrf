@@ -12,9 +12,10 @@ This repository contains a simple demonstration of a Server-Side Request Forgery
 
 ## Prerequisites
 
-- Docker Desktop
+- Docker Engine
+- Docker Compose
 
-Use Docker Compose in the folder with the files:
+Use Docker Compose in the folder with the files from the repository:
 
 ```
 docker-compose up --build
