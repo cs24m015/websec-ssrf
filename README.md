@@ -6,10 +6,7 @@ This repository contains a simple demonstration of a Server-Side Request Forgery
 
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
-  - [Step 1: Create the Second Service](#step-1-create-the-second-service)
-  - [Step 2: Run the Second Service](#step-2-run-the-second-service)
-  - [Step 3: Modify the SSRF Demonstration App](#step-3-modify-the-ssrf-demonstration-app)
-  - [Step 4: Test the SSRF](#step-4-test-the-ssrf)
+  - [Test the SSRF](#test-the-ssrf)
 - [Important Note](#important-note)
 - [License](#license)
 
@@ -23,7 +20,7 @@ Use Docker Compose in the folder with the files:
 docker-compose up --build
 ```
 
-### Step 1: Test the SSRF
+### Test the SSRF
 
 You can test the SSRF by sending a request to the `/fetch` endpoint with the URL of the confidential service. Use the following `curl` command:
 
