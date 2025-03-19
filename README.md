@@ -7,8 +7,8 @@ This repository contains a simple demonstration of a Server-Side Request Forgery
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
   - [Test the SSRF](#test-the-ssrf)
+  - [Explanation](#explanation)
 - [Important Note](#important-note)
-- [License](#license)
 
 ## Prerequisites
 
@@ -36,6 +36,30 @@ If everything is set up correctly, you should see a response that includes the c
     "data": "{\"status\": \"success\", \"data\": \"This is confidential information!\"}"
 }
 ```
+
+### Explanation
+
+SSRF (Server-Side Request Forgery) Demonstration
+
+If you were to run this application and then send a request to the /fetch endpoint with a URL that points to an internal service (like http://localhost:5000, http://127.0.0.1, or any other internal IP address), you could potentially demonstrate an SSRF vulnerability. Here's how it works:
+
+    Sending a Request: You would send a POST request to the /fetch endpoint with a JSON body that includes a URL. For example:
+
+json
+
+    {
+        "url": "http://localhost:5000/some_internal_endpoint"
+    }
+
+    Fetching the URL: The application would then attempt to fetch the content from the specified URL. If the URL points to an internal service that is accessible from the server where the Flask app is running, the request will succeed.
+
+    Response: The application will return the response from the internal service. If the internal service returns sensitive information or allows for further actions (like modifying data), this could lead to security issues.
+
+Example of a Potential SSRF Attack
+
+    Internal Services: If your application is running in an environment where it has access to internal services (like a database admin interface, metadata service, etc.), an attacker could exploit this by sending a request to the /fetch endpoint with a URL that targets those services.
+
+    Sensitive Data Exposure: If the internal service returns sensitive data (like AWS metadata, database information, etc.), the attacker could gain access to that information through the response from your Flask application.
 
 ## Important Note
 
