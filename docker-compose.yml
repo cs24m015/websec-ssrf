@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "5050:5050"
     networks:
       company_lan:
         ipv4_address: 172.20.0.100
@@ -14,7 +14,7 @@ services:
       context: .
       dockerfile: Dockerfile
     expose:
-      - "5000"
+      - "5050"
     command: ["python", "confidential_service.py"]
     networks:
       company_lan:
