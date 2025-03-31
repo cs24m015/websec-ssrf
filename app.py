@@ -1,5 +1,4 @@
-# app.py
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template_string
 import requests
 import logging
 
@@ -37,6 +36,47 @@ def fetch():
     except requests.exceptions.RequestException as req_err:
         logging.error(f"Request exception: {req_err}")
         return jsonify({'status': 'error', 'message': 'An error occurred while fetching the URL', 'details': str(req_err)}), 500
+
+@app.route('/public', methods=['GET'])
+def publicInformation():
+    return jsonify({'status': 'success', 'data': 'This is public information!'})
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template_string('''
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Public Information</title>
+        </head>
+        <body>
+            <h1>Public Information</h1>
+            <div id="result">Loading...</div>
+
+            <script>
+                async function loadFetchData() {
+                    const response = await fetch('/fetch', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ url: 'http://172.20.0.100:5000/public' })
+                    });
+                    const data = await response.json();
+
+                    // Extract and display only the 'data' field
+                    const parsedData = JSON.parse(data.data); // Parse the JSON string
+                    document.getElementById('result').innerText = parsedData.data; // Display the inner data
+                }
+
+                // Load the fetch data when the page loads
+                window.onload = loadFetchData;
+            </script>
+        </body>
+        </html>
+    ''')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

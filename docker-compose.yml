@@ -5,11 +5,24 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    networks:
+      company_lan:
+        ipv4_address: 172.20.0.100
 
   confidential_service:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "5001:5001"
+    expose:
+      - "5000"
     command: ["python", "confidential_service.py"]
+    networks:
+      company_lan:
+        ipv4_address: 172.20.0.110
+
+networks:
+  company_lan:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
