@@ -62,7 +62,7 @@ def index():
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ url: 'http://172.20.0.100:5000/public' })
+                        body: JSON.stringify({ url: 'http://172.20.0.100:5050/public' })
                     });
                     const data = await response.json();
 
@@ -79,4 +79,4 @@ def index():
     ''')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5050)

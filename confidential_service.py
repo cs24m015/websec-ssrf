@@ -7,4 +7,4 @@ def confidentialRoot():
     return jsonify({'status': 'success', 'data': 'This is confidential information!'})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5050)
